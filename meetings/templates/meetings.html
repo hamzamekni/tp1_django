@@ -8,15 +8,17 @@
 
         <li>
 
-            
+            <a href="{% url 'detail' meeting.id %}">
 
                 {{ meeting.title }}
 
-         
+            </a>
 
         </li>
 
-       
+        {% empty %}
+
+        <li>No meetings available at the moment.</li>
 
         {% endfor %}
 
