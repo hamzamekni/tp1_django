@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.shortcuts import render, redirect
+from .forms import MeetingForm
 from meetings.models import Meeting
 
 # Create your views here.
@@ -18,3 +19,14 @@ def meetings_list_view(request):
 def detail(request, id):
     meeting = get_object_or_404(Meeting, id=id)  
     return render(request, "details.html", {"meeting": meeting})
+
+def add_meeting(request):
+    if request.method == "POST":
+        form = MeetingForm(request.POST)
+        if form.is_valid():
+            form.save()  # Sauvegarde le meeting si le formulaire est valide
+            return redirect('meetings_list_view')  # Redirige vers une liste de meetings ou une autre page après ajout
+    else:
+        form = MeetingForm()
+
+    return render(request, 'new.html', {'form': form})
