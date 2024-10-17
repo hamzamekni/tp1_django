@@ -9,3 +9,7 @@
 <p>Durée : {{ meeting.duration }} heures</p>
 
 <p>Salle : {{ meeting.room }}</p>
+
+<a href="{% url 'delete' meeting.id %}">
+    <button type="button">Delete</button>
+</a>

@@ -30,3 +30,12 @@ def add_meeting(request):
         form = MeetingForm()
 
     return render(request, 'new.html', {'form': form})
+
+# Vue pour supprimer une réunion
+def delete_meeting(request, id):
+    meeting = get_object_or_404(Meeting, id=id) # Get the meeting by ID
+    if request.method == "POST":
+        meeting.delete()
+        return redirect('meetings') # Redirect to the meetings list view after deletion
+    return render(request, 'confirm_delete.html', {'meeting': meeting})
+    # Render confirmation page
